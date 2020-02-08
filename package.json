@@ -1,0 +1,23 @@
+{
+  "name": "programmer_room",
+  "version": "1.0.0",
+  "description": "Blog by Tigran Badalyan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armTIGRAN/Programmer-room-.git"
+  },
+  "keywords": [
+    "programmer",
+    "room"
+  ],
+  "author": "Tigran Badalyan <btigran02@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/armTIGRAN/Programmer-room-/issues"
+  },
+  "homepage": "https://github.com/armTIGRAN/Programmer-room-#readme"
+}

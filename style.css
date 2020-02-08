@@ -1,0 +1,147 @@
+.header{
+    width:99.7%;
+    height:85px;
+    background-color: rgb(51, 204, 204);
+}
+
+.menu{
+    height:50px;
+    width:100%;
+}
+
+.logo{
+  display:table-cell;
+}
+.siteName{
+  display:table-cell;
+  padding-left: 950px;
+}
+
+.body{
+  margin-top: -30px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.menuHeader ul{
+    margin-left: 450px;
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    justify-content: space-between;
+    text-align: center;
+}
+.menuHeader li{
+    padding: 9px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: rgb(51, 204, 204);
+	  min-width: 80px;
+	  margin: auto;
+}
+.menuHeader li:hover {
+  background-color:rgb(51, 204, 204);
+  background-size: 100% 100%;
+  color:white;
+  animation: spring 300ms ease-out;
+  font-weight: bold;
+}
+.menuHeader li:active {
+  transform: translateY(4px);
+}
+
+@keyframes spring {
+  15% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.2, 1.1);
+  }
+  40% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(0.95, 0.95);
+  }
+  75% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.05, 1);
+  }
+  100% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1, 1);
+  }
+}
+
+.leftMenu{
+    display: table-cell;
+    height:auto;
+    padding: 25px;
+}
+.leftMenu nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+.leftMenu nav ul li {
+	font-size: 20px;
+	font-family: sans-serif;
+	border: 2px solid rgb(51, 204, 204);
+	letter-spacing: 0.1em;
+	width: 6.2em;
+	height: 1.5em;
+	line-height: 1.5em;
+	position: relative;
+	overflow: hidden;
+	margin: 0.5em;
+	cursor: pointer;
+}
+.leftMenu nav ul li span {
+	color: rgb(51, 204, 204);
+	mix-blend-mode: difference;
+}
+.leftMenu nav ul li::before {
+	content: '';
+	position: absolute;
+	width: 1.5em;
+	height: inherit;
+	background-color: rgb(68, 221, 221);
+	border-radius: 50%;
+	top: 0;
+	left: -0.75em;
+	transition: 0.5s ease-out;
+}
+.leftMenu nav ul li:hover::before {
+    transform: scale(7);
+}
+
+.content{
+    display: table-cell;
+    width: 900px;
+}
+
+.language{
+  display: table-cell;
+  margin-left: 18px;
+  width: 126px;
+  height: 30px;
+  padding-bottom: 0px
+}
+.language ul{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.language li{
+  text-transform: uppercase;
+  cursor: pointer;
+  color: rgb(51, 204, 204);
+  margin: auto;
+}
+.language li:hover {
+  border:1px solid rgb(51, 204, 204);
+  animation: spring 300ms ease-out;
+  font-weight: bold;
+}
+.language li:active {
+  transform: translateY(6px);
+}
