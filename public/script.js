@@ -16,6 +16,3 @@ function changeLanguage(lng){
 }
 
 
-localStorage["language"]=="eng" ? document.getElementById("blog").innerHTML="Blog" : document.getElementById("blog").innerHTML="Блог";
-localStorage["language"]=="eng" ? document.getElementById("books").innerHTML="Books" : document.getElementById("books").innerHTML="Книги";
-localStorage["language"]=="eng" ? document.getElementById("forum").innerHTML="Forum" : document.getElementById("forum").innerHTML="Форум";
