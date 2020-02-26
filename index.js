@@ -1,12 +1,14 @@
 var express = require('express');
 var path = require('path');
 var app = express();
-
+var bodyParser = require('body-parser');
 
 // Define the port to run on
 app.set('port', process.env.PORT || 8000);
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.json());
 
 // Listen for requests
 var server = app.listen(app.get('port'), function () {
@@ -34,55 +36,47 @@ connection.connect((err) => {
     console.log("mysql connect");
 });
 
-//create database
-// app.get('/createdb', (req, res) => {
-//     let sql = 'CREATE DATABASE programmerroom';
-//     connection.query(sql, (err, result) => {
-//         if(err) throw err;
-//         console.log(result);
-//         res.send('Database created...');
-//     });
-// });
+const accountsQuery = `CREATE TABLE IF NOT EXISTS accounts(id int primary key AUTO_INCREMENT, username VARCHAR(255), password VARCHAR(255), position VARCHAR(255));`
+const postsQuery = `CREATE TABLE IF NOT EXISTS posts(id int primary key AUTO_INCREMENT, title VARCHAR(255), content TEXT, author int, data VARCHAR(255));`;
 
-// Create table
-app.get('/createpoststable', (req, res) => {
-    let sql = 'CREATE TABLE accounts(id int primary key AUTO_INCREMENT, username VARCHAR(255), password VARCHAR(255), position VARCHAR(255))';
-    connection.query(sql, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.send('Posts table created...');
-    });
+connection.query(accountsQuery, (err, result) => {
+    if (err) throw err;
+    console.log("initialized accounts table");
+});
+
+connection.query(postsQuery, (err, result) => {
+    if (err) throw err;
+    console.log("initialized posts table");
 });
 
 // Insert post 1
-app.post('/addpost1', (req, res) => {
-    let post = {username:mysqlUser, password: mysqlPassword};
-    let sql = 'INSERT INTO accounts SET ?';
-    let query = connection.query(sql, post, (err, result) => {
-        if(err) throw err;
+app.post('/posts', (req, res) => {
+    console.log(req.body);
+
+    // let post = { username: mysqlUser, password: mysqlPassword };
+    let sql = 'INSERT INTO posts SET ?';
+    let query = connection.query(sql, req.body, (err, result) => {
+        if (err) throw err;
         console.log(result);
         res.send('Post 1 added...');
     });
 });
 
-// Insert post 2
-app.post('/addpost2', (req, res) => {
-    let post = {username:mysqlUser, password: mysqlPassword};
-    let sql = 'INSERT INTO accounts SET ?';
-    let query = connection.query(sql, post, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.send('Post 2 added...');
-    });
-});
-
 // Select posts
-
-app.get('/getposts', (req, res) => {
-    let sql = 'SELECT * FROM accounts';
+app.get('/posts', (req, res) => {
+    let sql = 'SELECT * FROM posts';
     let query = connection.query(sql, (err, results) => {
-        if(err) throw err;
+        if (err) throw err;
         // res.send('Posts fetched...');
         res.send(results);
     });
 });
+
+app.delete('/posts/:id', (req, res) => {
+    let sql = `DELETE from posts WHERE id=${req.params.id}`;
+    let query = connection.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
+
