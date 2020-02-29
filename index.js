@@ -4,7 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 
 // Define the port to run on
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 80);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
