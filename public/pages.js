@@ -1,4 +1,3 @@
-var content = document.getElementById("PageContent");
 var books = [];
 
 books[0] = "Путь программиста"
@@ -25,11 +24,11 @@ fetch("/posts", {
 
 function addPost() {
     
-
     const post = {
         author: 1,
         title: 'here we go again!',
-        content: 'help please'
+        content: 'help please',
+        page: 'books'
     };
 
     fetch("/posts", {
@@ -47,7 +46,7 @@ function addPost() {
             posts = value;
         })
     });
-    content.innerHTML += posts[7]["title"] + "<br>"
+    content.innerHTML += posts[4]["title"] + "<br>"
 }
 
 

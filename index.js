@@ -37,7 +37,7 @@ connection.connect((err) => {
 });
 
 const accountsQuery = `CREATE TABLE IF NOT EXISTS accounts(id int primary key AUTO_INCREMENT, username VARCHAR(255), password VARCHAR(255), position VARCHAR(255));`
-const postsQuery = `CREATE TABLE IF NOT EXISTS posts(id int primary key AUTO_INCREMENT, title VARCHAR(255), content TEXT, author int, data VARCHAR(255));`;
+const postsQuery = `CREATE TABLE IF NOT EXISTS posts(id int primary key AUTO_INCREMENT, title VARCHAR(255), content TEXT, author int, date VARCHAR(255), page VARCHAR(255));`;
 
 connection.query(accountsQuery, (err, result) => {
     if (err) throw err;
@@ -65,6 +65,16 @@ app.post('/posts', (req, res) => {
 // Select posts
 app.get('/posts', (req, res) => {
     let sql = 'SELECT * FROM posts';
+    let query = connection.query(sql, (err, results) => {
+        if (err) throw err;
+        // res.send('Posts fetched...');
+        res.send(results);
+    });
+});
+
+// Select accounts
+app.get('/accounts', (req, res) => {
+    let sql = 'SELECT * FROM accounts';
     let query = connection.query(sql, (err, results) => {
         if (err) throw err;
         // res.send('Posts fetched...');

@@ -1,3 +1,6 @@
+var content = document.getElementById("PageContent");
+var title = document.getElementById("title");
+
 if(!localStorage.getItem("language")){
 	localStorage.setItem("language", "ru");
 }

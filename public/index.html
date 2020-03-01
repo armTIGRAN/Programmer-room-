@@ -3,11 +3,13 @@
 <html lang="en">
     <head>
         <title>Programmer room</title>
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/png">
+
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset="utf8">
 
         <link rel="icon" href="http://127.0.0.1/favicon.ico" type="image/x-icon">
-        <link rel="shortcut icon" href="http://127.0.0.1/favicon.ico" type="image/x-icon">
+        <!-- <link rel="shortcut icon" href="http://127.0.0.1/favicon.ico" type="image/x-icon"> -->
         <link rel="stylesheet" href="style.css">																								
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
@@ -18,18 +20,20 @@
                 <img style="width: 45px; height: 75px; margin-top: 4px; margin-left:30px;" src="images/logo.png" >
             </div>
         
-            <hgroup  class="siteName">
-                <h2 style="color:blue">Programmer room</h2>
-                <h3 style=" margin-top: 6px; margin-left: -17px; "> Blog by <a href=""> Tigran Badalyan</a> </h3>
+            <hgroup class="siteName">
+                <h2 style="color:rgb(49, 49, 134)">Programmer room</h2>
+                <h3> Blog by <a href=""> <spans style="margin-left: 5px;">Tigran Badalyan</span>  </a> </h3>
             </hgroup>  
         </header>
 
         <div class="menuHeader" >
             <ul>
                 <li id="Home"></li>
+                <!-- <li  onclick="contacts()" id="contacts"></li> -->
                 <li id="SiteDesign"></li>
                 <li id="Comments"></li>
                 <li id="Updates"></li>
+                <li  onclick="login()" id="Account"></li>
             </ul>
         </div>
 
@@ -43,19 +47,22 @@
                     </ul>
                 </div>
 
-                <nav style="margin-top: -20px">
+                <nav style="margin-top: -8px" >
                     <ul>
-                        <li><span id="Blog"></span></li>
                         <li><span id="About"></span></li>
+                        <li><span id="Blog"></span></li>
                         <li><span id="Skills"></span></li>
+                        <li><span id="Projects"></span></li>
                         <li onclick="Books()"><span id="Books"></span></li>
+                        <li onclick="Courses()"><span id="Courses"></span></li>
+                        <li onclick="Sources()"><span id="Sources"></span></li>
                     </ul>
                 </nav>
             </aside>
 
             <div class="content">
-                <h1 style="color:blue">title</h1>
-                <hr style="border-top: 1px solid blue;">
+                <h1 id="title" style="color:rgb(49, 49, 134)"></h1>
+                <!-- <hr style="border-top: 1px solid ;"> -->
                 <br>
                 <section id="PageContent"> 
                     <button type="button" onclick="addPost()">Add post</button>
@@ -89,6 +96,7 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="content.js"></script>
     <script type="text/javascript" src="pages.js"></script>
+    <script type="text/javascript" src="login.js"></script>
+    <script type="text/javascript" src="content.js"></script>
 </html>

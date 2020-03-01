@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
+  margin-left: -5px;
 }
   
 header, section, footer, aside, nav, article, figure, figcaption, hgroup{
@@ -24,11 +25,19 @@ header{
 }
 
 .logo{
-display:table-cell;
+  display:table-cell;
 }
 .siteName{
-display:table-cell;
-padding-left: 950px;
+  display:table-cell;
+  padding-left: 50px;
+  /* margin-top: -10px; */
+  /* padding-top:-20px ; */
+}
+.siteName h2{
+  font-size: 38px;
+}
+.siteName h3{
+  font-size: 15px;
 }
 
 .body{
@@ -95,13 +104,14 @@ font-size: 20px;
 font-family: sans-serif;
 border: 2px solid rgb(51, 204, 204);
 letter-spacing: 0.1em;
-width: 7em;
+width: 11em;
 height: 1.5em;
 line-height: 1.5em;
 position: relative;
 overflow: hidden;
-margin: 0.5em;
+margin:0.6em;
 cursor: pointer;
+padding-left: 0.5em;
 }
 .leftMenu nav ul li span {
 color: rgb(51, 204, 204);
@@ -124,7 +134,7 @@ transition: 0.5s ease-out;
 
 
 .rightMenu{
-  padding-left: 100px;
+  padding-left: 40px;
   display:table-cell;
   height:auto;
 }
@@ -140,7 +150,8 @@ transition: 0.5s ease-out;
 	position: relative;
 	overflow: hidden;
 	margin: 0.5em;
-	cursor: pointer;
+  cursor: pointer;
+  margin-left:20px;
 }
 .rightMenu li:hover{
   border:1px solid rgb(68, 221, 221);
@@ -152,7 +163,7 @@ transition: 0.5s ease-out;
 
 .content{
   display: table-cell;
-  width: 900px;
+  width: 880px;
 }
 
 .language{
@@ -181,3 +192,4 @@ font-weight: bold;
 .language li:active {
 transform: translateY(6px);
 }
+
