@@ -5,18 +5,54 @@
   margin-left: -5px;
 }
   
-header, section, footer, aside, nav, article, figure, figcaption, hgroup{
+section, footer, aside, nav, article, figure, figcaption, hgroup{
   display: block;
 }
 
 body{
   text-align: center;
+  width:100%;
+
+  display: -moz-box;
+  display: -webkit-box;
+
+  -moz-box-pack: center;
+  -webkit-box-pack: center;
+  -ms-box-pack: center;
+  -o-box-pack: center;
 }
 
-header{
-  width:99.7%;
+#wrapper{
+  max-width:100%;
+
+  display: -moz-box;
+  display: -webkit-box;
+
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
+
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
+}
+
+#header{
+  width:100.5%;
   height:85px;
   background-color: rgb(51, 204, 204);
+
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: -o-box;
+
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -ms-box-orient: horizontal;
+  -o-box-orient: horizontal;
 }
 
 .menu{
@@ -24,14 +60,8 @@ header{
   width:100%;
 }
 
-.logo{
-  display:table-cell;
-}
 .siteName{
-  display:table-cell;
-  padding-left: 50px;
-  /* margin-top: -10px; */
-  /* padding-top:-20px ; */
+  padding-left: 2.7em;
 }
 .siteName h2{
   font-size: 38px;
@@ -41,155 +71,229 @@ header{
 }
 
 .body{
+  display: -moz-box;
+  display: -webkit-box;
+
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -ms-box-orient: horizontal;
+  -o-box-orient: horizontal;
+
   margin-top: -30px;
+  margin-left: 40px;
 }
 
-.menuHeader ul{
-  margin-left: 450px;
-  display: flex;
-  width: 80%;
-  max-width: 1000px;
-  justify-content: space-between;
+.menuHeader{
+  display: -moz-box;
+  display: -webkit-box;
+
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -ms-box-orient: horizontal;
+  -o-box-orient: horizontal;
+
   text-align: center;
 }
-.menuHeader li{
+.menuHeader li:not(:first-child){
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-webkit-flex: 1;
+  -o-webkit-flex: 1;
+
   padding: 9px;
   text-transform: uppercase;
   cursor: pointer;
   color: rgb(51, 204, 204);
-  min-width: 80px;
-  margin: auto;
 }
-.menuHeader li:hover {
-background-color:rgb(51, 204, 204);
-background-size: 100% 100%;
-color:white;
-animation: spring 300ms ease-out;
-font-weight: bold;
+.menuHeader li:hover:not(:first-child) {
+  background-color:rgb(51, 204, 204);
+  background-size: 100% 100%;
+  color:white;
+  animation: spring 300ms ease-out;
+  font-weight: bold;
 }
-.menuHeader li:active {
-transform: translateY(4px);
+.menuHeader li:active:not(:first-child) {
+  transform: translateY(4px);
+}
+.menuHeader li:first-child{
+  -webkit-box-flex: 3;
+  -moz-box-flex: 3;
+  -ms-webkit-flex: 3;
+  -o-webkit-flex: 3;
 }
 
 @keyframes spring {
-15% {
-  -webkit-transform-origin: center center;
-  -webkit-transform: scale(1.2, 1.1);
-}
-40% {
-  -webkit-transform-origin: center center;
-  -webkit-transform: scale(0.95, 0.95);
-}
-75% {
-  -webkit-transform-origin: center center;
-  -webkit-transform: scale(1.05, 1);
-}
-100% {
-  -webkit-transform-origin: center center;
-  -webkit-transform: scale(1, 1);
-}
+  15% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.2, 1.1);
+
+    -moz-transform-origin: center center;
+    -moz-transform: scale(1.2, 1.1);
+
+    -ms-transform-origin: center center;
+    -ms-transform: scale(1.2, 1.1);
+
+    -o-transform-origin: center center;
+    -o-transform: scale(1.2, 1.1);
+  }
+  40% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(0.95, 0.95);
+
+    -moz-transform-origin: center center;
+    -moz-transform: scale(0.95, 0.95);
+
+    -ms-transform-origin: center center;
+    -ms-transform: scale(0.95, 0.95);
+
+    -o-transform-origin: center center;
+    -o-transform: scale(0.95, 0.95);
+  }
+  75% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.05, 1);
+
+    -moz-transform-origin: center center;
+    -moz-transform: scale(1.05, 1);
+
+    -ms-transform-origin: center center;
+    -ms-transform: scale(1.05, 1);
+
+    -o-transform-origin: center center;
+    -o-transform: scale(1.05, 1);
+  }
+  100% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1, 1);
+
+    -moz-transform-origin: center center;
+    -moz-transform: scale(1, 1);
+
+    -ms-transform-origin: center center;
+    -ms-transform: scale(1, 1);
+
+    -o-transform-origin: center center;
+    -o-transform: scale(1, 1);
+  }
 }
 
 .leftMenu{
-  display: table-cell;
-  height:auto;
-  padding: 25px;
+  height: auto;
+  padding: 20px;
+
+  display: -moz-box;
+  display: -webkit-box;
+
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
 }
 .leftMenu nav ul {
-list-style-type: none;
-padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 .leftMenu nav ul li {
-font-size: 20px;
-font-family: sans-serif;
-border: 2px solid rgb(51, 204, 204);
-letter-spacing: 0.1em;
-width: 11em;
-height: 1.5em;
-line-height: 1.5em;
-position: relative;
-overflow: hidden;
-margin:0.6em;
-cursor: pointer;
-padding-left: 0.5em;
+  border-radius: 10px;
+  font-size: larger;
+  font-family: sans-serif;
+  border: 2px solid rgb(51, 204, 204);
+  letter-spacing: 0.1em;
+  width: 8.5em;
+  height: 1.6em;
+  line-height: 1.5em;
+  position: relative;
+  overflow: hidden;
+  margin: 0.7em;
+  cursor: pointer;
+  padding-left: 0.5em;
 }
 .leftMenu nav ul li span {
-color: rgb(51, 204, 204);
-mix-blend-mode: difference;
+  padding-left: 12px;
+  color: rgb(51, 204, 204);
+  mix-blend-mode: difference;
 }
 .leftMenu nav ul li::before {
-content: '';
-position: absolute;
-width: 1.5em;
-height: inherit;
-background-color: rgb(68, 221, 221);
-border-radius: 50%;
-top: 0;
-left: -0.75em;
-transition: 0.5s ease-out;
+  content: '';
+  position: absolute;
+  width: 1.5em;
+  height: inherit;
+  background-color: rgb(68, 221, 221);
+  border-radius: 50%;
+  top: 0;
+  left: -0.75em;
+  transition: 0.3s ease-out;
 }
 .leftMenu nav ul li:hover::before {
   transform: scale(7);
 }
-
-
 .rightMenu{
-  padding-left: 40px;
-  display:table-cell;
-  height:auto;
-}
-.rightMenu li{
-  color:rgb(68, 221, 221);
+  padding-right: 100px;
 }
 .rightMenu li {
 	font-size: 20px;
 	font-family: serif;
-	letter-spacing: 0.1em;
-	height: 1.5em;
-	line-height: 1.em;
-	position: relative;
-	overflow: hidden;
-	margin: 0.5em;
+  letter-spacing: 0.1em;
+  margin: 0.4em;
   cursor: pointer;
-  margin-left:20px;
+  margin-left:18px;
+  color:rgb(68, 221, 221);
 }
 .rightMenu li:hover{
-  border:1px solid rgb(68, 221, 221);
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  border-bottom:1px solid rgb(68, 221, 221);
 }
-
+.rigthMenu h2{
+  padding-left: -50px;
+}
 
 .content{
-  display: table-cell;
-  width: 880px;
-}
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-box-flex: 1;
+  -o-box-flex: 1;
+
+  margin-top:60px;
+  width:60%;
+  min-width:210px;
+ }
 
 .language{
-display: table-cell;
-margin-left: 18px;
-width: 126px;
-height: 30px;
-padding-bottom: 0px
+  display: table-cell;
+
+  padding-bottom: 0px;
+
+  display: -moz-box;
+  display: -webkit-box;
+
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  -o-box-pack: start;
+
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -ms-box-orient: horizontal;
+  -o-box-orient: horizontal;
 }
 .language ul{
-display: flex;
-justify-content: space-between;
-text-align: center;
+  margin-left: 8px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
 }
 .language li{
-text-transform: uppercase;
-cursor: pointer;
-color: rgb(51, 204, 204);
-margin: auto;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: rgb(51, 204, 204);
+  margin: auto;
+  justify-content: space-between;
 }
 .language li:hover {
-border:1px solid rgb(51, 204, 204);
-animation: spring 300ms ease-out;
-font-weight: bold;
+  border:1px solid rgb(51, 204, 204);
+  animation: spring 300ms ease-out;
+  font-weight: bold;
 }
 .language li:active {
-transform: translateY(6px);
+  transform: translateY(6px);
 }
 

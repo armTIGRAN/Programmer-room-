@@ -20,15 +20,20 @@ var server = app.listen(app.get('port'), function () {
 
 var mysql = require('mysql');
 
-var mysqlUser = 'G1xMeJNq45';
-var mysqlPassword = '7fFEISxz4p';
+// var mysqlUser = 'G1xMeJNq45';
+// var mysqlPassword = '7fFEISxz4p';
+
+var mysqlUser = 'b_tko_a';
+var mysqlPassword = '5cf5c7ca60d';
 
 var connection = mysql.createConnection({
-    host: 'remotemysql.com',
+    // host: 'remotemysql.com',
+    host: "db4free.net",
     port: 3306,
     user: mysqlUser,
     password: mysqlPassword,
-    database: 'G1xMeJNq45'
+    // database: 'G1xMeJNq45'
+    database: "programmerroom"
 });
 
 connection.connect((err) => {
@@ -49,7 +54,7 @@ connection.query(postsQuery, (err, result) => {
     console.log("initialized posts table");
 });
 
-// Insert post 1
+// Insert post 
 app.post('/posts', (req, res) => {
     console.log(req.body);
 
@@ -72,6 +77,17 @@ app.get('/posts', (req, res) => {
     });
 });
 
+
+
+app.delete('/posts/:id', (req, res) => {
+    let sql = `DELETE from posts WHERE id=${req.params.id}`;
+    let query = connection.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
+
+
 // Select accounts
 app.get('/accounts', (req, res) => {
     let sql = 'SELECT * FROM accounts';
@@ -82,11 +98,14 @@ app.get('/accounts', (req, res) => {
     });
 });
 
-app.delete('/posts/:id', (req, res) => {
-    let sql = `DELETE from posts WHERE id=${req.params.id}`;
-    let query = connection.query(sql, (err, results) => {
+app.post('/accounts', (req, res) => {
+    console.log(req.body);
+
+    // let post = { username: mysqlUser, password: mysqlPassword };
+    let sql = 'INSERT INTO posts SET ?';
+    let query = connection.query(sql, req.body, (err, result) => {
         if (err) throw err;
-        res.send(results);
+        console.log(result);
+        res.send('Account 1 added...');
     });
 });
-

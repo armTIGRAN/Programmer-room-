@@ -1,4 +1,4 @@
-let accounts;
+// let accounts;
 
 if(!localStorage.getItem("account")){
 	localStorage.setItem("account", "undefined");
