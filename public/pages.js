@@ -5,7 +5,7 @@ books[1] = "Стив Круг"
 books[2] = "Совершенный код"
 
 var posts =[];
-var accounts=[];
+
 var test;
 
 function Books() {
@@ -79,10 +79,14 @@ function addPost(){
 
 
 function deletePost() {
-    fetch(`/posts/${document.getElementById('int').value}`, {
+    const postId = document.getElementById('int').value;
+
+    fetch(`/posts/${postId}`, {
         method: "DELETE"
     });
-    
+
+    const deletedPostIndex = posts.findIndex(element => element._id == postId);
+    posts.splice(deletedPostIndex, 1);
 }
 // content.innerHTML += posts[7]["title"] + "<br>"
 function testCon(){

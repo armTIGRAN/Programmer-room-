@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/armTIGRAN/Programmer-room-#readme",
   "dependencies": {
-    "@frangiskos/mssql": "^0.1.2",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "mongojs": "^3.1.0"
   }
 }

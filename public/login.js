@@ -1,4 +1,4 @@
-// let accounts;
+
 
 if(!localStorage.getItem("account")){
 	localStorage.setItem("account", "undefined");
@@ -6,14 +6,6 @@ if(!localStorage.getItem("account")){
 
 function login(){
 
-    fetch("/accounts", {
-        method: "GET"
-    }).then(res => {
-        res.json().then(value => {
-            accounts = value;
-        })
-    });
-    
     content.innerHTML ='<div id="LoginDiv"> <h1 id="login">Login</h1> <br> <span id="loginUsername"></span> <input id="username" style="margin-left:5px; width: 150px"> <br><br> <span id="loginPassword"></span> <input id="password" type="password" style=" margin-left:9px; width: 150px"><br><br> <button type="button" style="margin-left:-6px; width:145px" onclick=ForgetPassword()><spam id="ForgetPassword"></spam></button><button type="button" style="width:87px; margin-left:5px" onclick=LoginUser()><spam id="LogButton"></spam></button> </div>'; 
     document.getElementById("LoginDiv").style.marginLeft="35px"
 
@@ -33,22 +25,30 @@ function login(){
 } 
 
 function LoginUser(){
-    
-    fetch("/accounts", {
-        method: "GET"
+    fetch("/login", {
+        method: "POST",
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        }),
     }).then(res => {
-        res.json().then(value => {
-            accounts = value;
-        })
+		if (res.status == 401) {
+            res.json().then(err => {
+                if (err.errorMessage == 'wrongPassword') {
+                    alert("wrong password");
+                } else {
+                    alert("wrong username");
+                }
+            });
+        }
+        else {
+            res.json().then(value => {
+                alert("yeah");
+                localStorage["account"] = value.username;
+                location.reload();
+            });
+        }
     });
 
-    for(var i=0; i<accounts.length; i++){
-        if(document.getElementById("username").value==accounts[i]["username"]){
-            if(document.getElementById("password").value==accounts[i]["password"]){
-                alert("yeah");
-                localStorage["account"]=accounts[i]["username"];
-                location.reload();
-            }else alert("wrong password");
-        }else alert("User with nickname " + document.getElementById("username").value + " does not exist")
-    }
 }

@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
+const mongojs = require('mongojs')
 
 // Define the port to run on
 app.set('port', process.env.PORT || 80);
@@ -18,83 +19,59 @@ var server = app.listen(app.get('port'), function () {
 
 ///////////////////////////////////////////
 
-var mysql = require('mysql');
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
+const connectionString = `mongodb+srv://${dbUser}:${dbPassword}@cluster0-gt3si.gcp.mongodb.net/programmer-room?retryWrites=true&w=majority`;
 
-// var mysqlUser = 'G1xMeJNq45';
-// var mysqlPassword = '7fFEISxz4p';
-
-var mysqlUser = 'b_tko_a';
-var mysqlPassword = '5cf5c7ca60d';
-
-var connection = mysql.createConnection({
-    // host: 'remotemysql.com',
-    host: "db4free.net",
-    port: 3306,
-    user: mysqlUser,
-    password: mysqlPassword,
-    // database: 'G1xMeJNq45'
-    database: "programmerroom"
-});
-
-connection.connect((err) => {
-    if (err) throw err;
-    console.log("mysql connect");
-});
-
-const accountsQuery = `CREATE TABLE IF NOT EXISTS accounts(id int primary key AUTO_INCREMENT, username VARCHAR(255), password VARCHAR(255), position VARCHAR(255));`
-const postsQuery = `CREATE TABLE IF NOT EXISTS posts(id int primary key AUTO_INCREMENT, title VARCHAR(255), content TEXT, author int, date VARCHAR(255), page VARCHAR(255));`;
-
-connection.query(accountsQuery, (err, result) => {
-    if (err) throw err;
-    console.log("initialized accounts table");
-});
-
-connection.query(postsQuery, (err, result) => {
-    if (err) throw err;
-    console.log("initialized posts table");
-});
+const db = mongojs(connectionString);
 
 // Insert post 
 app.post('/posts', (req, res) => {
-    console.log(req.body);
-
-    // let post = { username: mysqlUser, password: mysqlPassword };
-    let sql = 'INSERT INTO posts SET ?';
-    let query = connection.query(sql, req.body, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send('Post 1 added...');
+    db.posts.insert(req.body, (result, error) => {
+        if (error) {
+            res.status(500).send(error);
+        } else {
+            res.send(result);
+        }
     });
 });
 
-// Select posts
+// Get all posts
 app.get('/posts', (req, res) => {
-    let sql = 'SELECT * FROM posts';
-    let query = connection.query(sql, (err, results) => {
-        if (err) throw err;
-        // res.send('Posts fetched...');
-        res.send(results);
+    db.posts.find((error, result) => {
+        if (error) {
+            res.status(500).send(error);
+        } else {
+            res.send(result);
+        }
     });
 });
-
-
 
 app.delete('/posts/:id', (req, res) => {
-    let sql = `DELETE from posts WHERE id=${req.params.id}`;
-    let query = connection.query(sql, (err, results) => {
-        if (err) throw err;
-        res.send(results);
+    db.posts.remove({_id: mongojs.ObjectId(req.params.id)}, (error, result) => {
+        if (error) {
+            res.status(500).send(error);
+        } else {
+            res.send(result);
+        }
     });
+
 });
 
+// Get accounts
+app.post('/login', (req, res) => {
+    db.accounts.findOne({username: req.body.username}, (error, result) => {
+        if (error) {
+            res.status(500).send(error);
+        } else if (!result) {
+            res.status(401).send({errorMessage: 'wrongUsername'});
+        } else if (req.body.password != result.password) {
+            res.status(401).send({errorMessage: 'wrongPassword'});
+        } else {
+            delete result.password;
 
-// Select accounts
-app.get('/accounts', (req, res) => {
-    let sql = 'SELECT * FROM accounts';
-    let query = connection.query(sql, (err, results) => {
-        if (err) throw err;
-        // res.send('Posts fetched...');
-        res.send(results);
+            res.send(result);
+        }
     });
 });
 
@@ -109,3 +86,13 @@ app.post('/accounts', (req, res) => {
         res.send('Account 1 added...');
     });
 });
+
+// app.get("/content", (req, res) => {
+//     db.posts.find({"content": "help please"}, (error, result) => {
+//         if (error) {
+//             res.status(500).send(error);
+//         } else {
+//             res.send(result);
+//         }
+//     });
+// });
