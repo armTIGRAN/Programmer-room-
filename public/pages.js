@@ -1,19 +1,5 @@
-var books = [];
-
-books[0] = "Путь программиста"
-books[1] = "Стив Круг"
-books[2] = "Совершенный код"
 
 var posts =[];
-
-var test;
-
-function Books() {
-    content.innerHTML = "";
-    for (i = 0; i < books.length; i++) {
-        content.innerHTML += "<article>" + books[i] + "</article>"
-    }
-}
 
 fetch("/posts", {
     method: "GET"
@@ -22,8 +8,6 @@ fetch("/posts", {
         posts = value;
     })
 });
-
-
 
 function addAccount(){
     const account = {
@@ -88,9 +72,4 @@ function deletePost() {
     const deletedPostIndex = posts.findIndex(element => element._id == postId);
     posts.splice(deletedPostIndex, 1);
 }
-// content.innerHTML += posts[7]["title"] + "<br>"
-function testCon(){
-    content.innerHTML += posts[2]["title"] + "<br>"
-}
-
 

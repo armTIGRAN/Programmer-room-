@@ -212,6 +212,7 @@ body{
   padding-left: 12px;
   color: rgb(51, 204, 204);
   mix-blend-mode: difference;
+  text-align:end
 }
 .leftMenu nav ul li::before {
   content: '';
@@ -223,6 +224,10 @@ body{
   top: 0;
   left: -0.75em;
   transition: 0.3s ease-out;
+}
+.leftMenu nav ul li:hover{
+  animation: spring 300ms ease-out;
+
 }
 .leftMenu nav ul li:hover::before {
   transform: scale(7);

@@ -23,6 +23,7 @@
   "homepage": "https://github.com/armTIGRAN/Programmer-room-#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongo": "^0.1.0",
     "mongojs": "^3.1.0"
   }
 }
