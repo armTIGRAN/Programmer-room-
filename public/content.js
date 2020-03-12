@@ -7,7 +7,10 @@ navigation("siteNameH2", "Programmer room", "Programmer room", HomePage);
 
 //TOP MENU
 navigation("Home", "Home", "Главная", HomePage);
-navigation("About", "About", "Обо всём");
+// window.onload = HomePage
+
+navigation("Blog", "Blog", "Блог");
+navigation("About", "About", "Обо всём", About);
 navigation("Updates", "Updates", "Обновления");
 navigation("Account", localStorage["account"], localStorage["account"], login)
 
@@ -26,6 +29,3 @@ navigation("Projects", "Projects", "Проекты");
 navigation("JSProjects", "Projects", "Проекты");
 
 //Scratch
-
-
-

@@ -1,5 +1,5 @@
 
-var posts =[];
+let posts =[];
 
 fetch("/posts", {
     method: "GET"

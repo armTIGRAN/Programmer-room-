@@ -64,13 +64,15 @@ body{
   padding-left: 2.7em;
 }
 .siteName h2{
-  font-size: 38px;
+  font-size: 33px;
+  color:rgb(27, 69, 254) ; 
+  cursor: pointer;
 }
 .siteName h3{
   font-size: 15px;
 }
 
-.body{
+#body{
   display: -moz-box;
   display: -webkit-box;
 
@@ -79,8 +81,8 @@ body{
   -ms-box-orient: horizontal;
   -o-box-orient: horizontal;
 
-  margin-top: -30px;
-  margin-left: 40px;
+  margin-top: -10px;
+  margin-left: 15px;
 }
 
 .menuHeader{
@@ -177,9 +179,10 @@ body{
   }
 }
 
-.leftMenu{
+#leftMenu{
   height: auto;
   padding: 20px;
+  margin-top: 50px;
 
   display: -moz-box;
   display: -webkit-box;
@@ -189,11 +192,11 @@ body{
   -ms-box-orient: vertical;
   -o-box-orient: vertical;
 }
-.leftMenu nav ul {
+#leftMenu nav ul {
   list-style-type: none;
   padding: 0;
 }
-.leftMenu nav ul li {
+#leftMenu nav ul li {
   border-radius: 10px;
   font-size: larger;
   font-family: sans-serif;
@@ -208,13 +211,13 @@ body{
   cursor: pointer;
   padding-left: 0.5em;
 }
-.leftMenu nav ul li span {
+#leftMenu nav ul li span {
   padding-left: 12px;
   color: rgb(51, 204, 204);
   mix-blend-mode: difference;
   text-align:end
 }
-.leftMenu nav ul li::before {
+#leftMenu nav ul li::before {
   content: '';
   position: absolute;
   width: 1.5em;
@@ -225,17 +228,17 @@ body{
   left: -0.75em;
   transition: 0.3s ease-out;
 }
-.leftMenu nav ul li:hover{
+#leftMenu nav ul li:hover{
   animation: spring 300ms ease-out;
-
 }
-.leftMenu nav ul li:hover::before {
+#leftMenu nav ul li:hover::before {
   transform: scale(7);
 }
-.rightMenu{
-  padding-right: 100px;
+#rightMenu{
+  padding-right: 45px;
+  margin-top: 50px;
 }
-.rightMenu li {
+#rightMenu li {
 	font-size: 20px;
 	font-family: serif;
   letter-spacing: 0.1em;
@@ -244,10 +247,10 @@ body{
   margin-left:18px;
   color:rgb(68, 221, 221);
 }
-.rightMenu li:hover{
+#rightMenu li:hover{
   border-bottom:1px solid rgb(68, 221, 221);
 }
-.rigthMenu h2{
+#rigthMenu h2{
   padding-left: -50px;
 }
 
@@ -281,7 +284,6 @@ body{
   -o-box-orient: horizontal;
 }
 .language ul{
-  margin-left: 8px;
   display: flex;
   justify-content: space-between;
   text-align: center;

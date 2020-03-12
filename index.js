@@ -21,12 +21,12 @@ var server = app.listen(app.get('port'), function () {
 
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
+
 // const connectionString = `mongodb+srv://$mongo "mongodb+srv://cluster0-gt3si.gcp.mongodb.net/test" --username b_tiko
 // {dbUser}:${dbPassword}@cluster0-gt3si.gcp.mongodb.net/programmer-room?retryWrites=true&w=majority`;
 
 const connectionString = `mongodb+srv://b_tiko:${dbPassword}@cluster0-gt3si.gcp.mongodb.net/programmer-room?retryWrites=true&w=majority`
 const db = mongojs(connectionString);
-
 // Insert post 
 app.post('/posts', (req, res) => {
     db.posts.insert(req.body, (result, error) => {
