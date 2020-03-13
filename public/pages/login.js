@@ -3,6 +3,7 @@ if(!localStorage.getItem("account") || localStorage["account"]=="login" || local
 }
 
 function login(){
+    localStorage.setItem("page", "login");
 
     content.innerHTML ='<div id="LoginDiv"> <h1 id="login">Login</h1> <br> <span id="loginUsername"></span> <input id="username" style="margin-left:5px; width: 150px"> <br><br> <span id="loginPassword"></span> <input id="password" type="password" style=" margin-left:9px; width: 150px"><br><br> <button type="button" style="margin-left:-6px; width:145px" onclick=ForgetPassword()><spam id="ForgetPassword"></spam></button><button type="button" style="width:87px; margin-left:5px" onclick=LoginUser()><spam id="LogButton"></spam></button> </div>'; 
     id("LoginDiv").style.marginLeft="35px"

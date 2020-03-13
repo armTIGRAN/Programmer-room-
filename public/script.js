@@ -1,4 +1,7 @@
+let homePage=false;
+
 PageSettings();
+
 
 const content = id("PageContent");
 const title = id("title");
@@ -15,7 +18,10 @@ function css(Id, css){
 
 function PageSettings(){
 
-    if(!localStorage.getItem("page")) localStorage.setItem("page", "home");
+    if(!localStorage.getItem("page")){
+        homePage=true;
+        localStorage.setItem("page", "home");
+    }
     
     if(!localStorage.getItem("language")) localStorage.setItem("language", "ru");
     css(localStorage["language"], {
@@ -33,9 +39,12 @@ function PageSettings(){
     }
 }
 
-const siteVisibility=setInterval(check, 800);
+const siteVisibility=setInterval(check, 600);
 function check(){
-    id("body").offsetWidth<1000 ? id("rightMenu").style.display="none" : id("rightMenu").style.display="block"
-    id("body").offsetWidth<500 ? id("leftMenu").style.display="none" : id("leftMenu").style.display="block"
-    id("body").offsetWidth<300 ? id("siteNameH3").style.display="none" : id("siteNameH3").style.display="block"
+    function displayNone(Id, width){
+        id("body").offsetWidth<width ? id(Id).style.display="none" : id(Id).style.display="block"
+    }
+    displayNone("rightMenu", 1000);
+    displayNone("leftMenu", 500);
+    displayNone("siteNameH3", 350);
 }
