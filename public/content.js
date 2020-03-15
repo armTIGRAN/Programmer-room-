@@ -3,13 +3,23 @@ function navigation(Id, eng, rus, functionName){
     id(Id).addEventListener("click", functionName);
 }
 
+function translate(rus, eng){
+    if(localStorage["language"]=="eng"){
+        if(eng) return eng
+        else return rus
+    }else{
+        if(rus) return rus
+        else return eng
+    }
+}
+
 navigation("siteNameH2", "Programmer room", "Programmer room", HomePage);
 
 //TOP MENU
 navigation("Home", "Home", "Главная", HomePage);
 
 navigation("Blog", "Blog", "Блог");
-navigation("About", "About", "Информация", About);
+// navigation("About", "About", "Информация", About);
 navigation("Updates", "Updates", "Обновления");
 navigation("Account", localStorage["account"], localStorage["account"], login)
 
@@ -29,8 +39,12 @@ navigation("JSProjects", "Projects", "Проекты");
 
 //Scratch
 
+//Info
+
+
 if(homePage) HomePage();
 else{
+    if(localStorage["page"]=="HomePage") HomePage()
     if(localStorage["page"]=="login") login()
     if(localStorage["page"]=="About") About()
 }

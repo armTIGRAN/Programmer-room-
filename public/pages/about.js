@@ -4,9 +4,9 @@ function About(){
     localStorage.setItem("page", "About");
     
     id("title").style.display="none"
-    content.innerHTML ="<img id='mainImg' src='../images/me.jpg'/><div id='aboutContent'></div>";
+    content.innerHTML ="<img id='meImg' src='../images/me.jpg'/><div id='aboutContent'></div>";
     
-    css("mainImg", {
+    css("meImg", {
         "width": "30%",
         "height": "550px",
         "minWidth": "300px",
@@ -19,7 +19,7 @@ function About(){
     })
 
     id("aboutContent").innerHTML = "<h1> <b style>Tigran Badalyan </b>  </h1> <br>"
-    id("aboutContent").innerHTML 
+    // id("aboutContent").innerHTML 
     
     id("aboutContent").innerHTML +="<h4> <b>Gmail:</b> btigran02@gmail.com </h4>"
     id("aboutContent").innerHTML +="<h4> <b>Github: </b> <a href='https://github.com/armTIGRAN' target='_blank'>  https://github.com/armTIGRAN <a/> </h4>"
