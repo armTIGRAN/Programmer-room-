@@ -22,6 +22,10 @@ function PageSettings(){
         homePage=true;
         localStorage.setItem("page", "home");
     }
+
+    if(!localStorage.getItem("role")){
+        localStorage.setItem("role", "guest");
+    }
     
     if(!localStorage.getItem("language")) localStorage.setItem("language", "ru");
     css(localStorage["language"], {

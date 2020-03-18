@@ -79,8 +79,6 @@ app.post('/login', (req, res) => {
 
 app.post('/accounts', (req, res) => {
     console.log(req.body);
-
-    // let post = { username: mysqlUser, password: mysqlPassword };
     let sql = 'INSERT INTO posts SET ?';
     let query = connection.query(sql, req.body, (err, result) => {
         if (err) throw err;

@@ -47,6 +47,4 @@ function HomePage(){
         "font-size": "21px",
         "color":"rgb(51, 204, 204)"
     })
-
-
 }

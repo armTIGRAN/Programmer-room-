@@ -18,7 +18,7 @@ navigation("siteNameH2", "Programmer room", "Programmer room", HomePage);
 //TOP MENU
 navigation("Home", "Home", "Главная", HomePage);
 
-navigation("Blog", "Blog", "Блог");
+navigation("Blog", "Blog", "Блог",Blog);
 // navigation("About", "About", "Информация", About);
 navigation("Updates", "Updates", "Обновления");
 navigation("Account", localStorage["account"], localStorage["account"], login)
@@ -47,4 +47,5 @@ else{
     if(localStorage["page"]=="HomePage") HomePage()
     if(localStorage["page"]=="login") login()
     if(localStorage["page"]=="About") About()
+    if(localStorage["page"]=="Blog") Blog()
 }

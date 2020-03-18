@@ -17,16 +17,14 @@ function login(){
         id("loginUsername").innerHTML="Ник: ";
         id("loginPassword").innerHTML="Пароль: ";
     }
-    
-    localStorage["language"]=="eng" ? id("login").innerHTML="Login" : id("login").innerHTML="Вход";
-    localStorage["language"]=="eng" ? id("ForgetPassword").innerHTML="Forget password?" : id("ForgetPassword").innerHTML="Забыли пароль?";
-    localStorage["language"]=="eng" ? id("LogButton").innerHTML="Login" : id("LogButton").innerHTML="Вход";
+    navigation("LogButton", "login", "вход"); 
+    navigation("ForgetPassword", "forget password?", "забыли пароль?");
 } 
 
 function LoginUser(){
     fetch("/login", {
         method: "POST",
-		headers: { 'Content-Type': 'application/json' },
+		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({
             username: id("username").value,
             password: id("password").value
@@ -34,20 +32,17 @@ function LoginUser(){
     }).then(res => {
 		if (res.status == 401) {
             res.json().then(err => {
-                if (err.errorMessage == 'wrongPassword') {
-                    alert("wrong password");
-                } else {
-                    alert("wrong username");
-                }
+                if (err.errorMessage == 'wrongPassword') alert("wrong password");
+                else alert("wrong username");
             });
         }
-        else {
+        else{
             res.json().then(value => {
                 alert("yeah");
                 localStorage["account"] = value.username;
+                localStorage["role"] = value.role;
                 location.reload();
             });
         }
     });
-
 }
