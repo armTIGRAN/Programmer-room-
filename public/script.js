@@ -1,4 +1,5 @@
 let homePage=false;
+let posts =[];
 
 PageSettings();
 
@@ -28,6 +29,7 @@ function PageSettings(){
     }
     
     if(!localStorage.getItem("language")) localStorage.setItem("language", "ru");
+    
     css(localStorage["language"], {
         "color": "white",
         "backgroundColor": "rgb(51, 204, 204)",
@@ -41,6 +43,15 @@ function PageSettings(){
         localStorage["language"] = lng;
         location.reload();
     }
+
+    //get posts[]
+    fetch("/posts", {
+        method: "GET"
+    }).then(res => {
+        res.json().then(value => {
+            posts = value;
+        })
+    });
 }
 
 const siteVisibility=setInterval(check, 600);

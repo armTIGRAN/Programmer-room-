@@ -1,78 +1,39 @@
-/* <h1 id="title" style="color:rgb(49, 49, 134)"></h1>
-<br>
-<section id="PageContent"> 
-    <button type="button" onclick="addPost()">Add post</button>
-    <br> <br>
-    <button type="button" onclick="deletePost()">Delete post</button>
-    <button type="button" onclick="testCon()">test</button>
-    <input type="text" id="int">
-</section> */
-
-
-
-let posts =[];
-
-fetch("/posts", {
-    method: "GET"
-}).then(res => {
-    res.json().then(value => {
-        posts = value;
-    })
-});
-
-function deletePost() {
-    const postId = document.getElementById('int').value;
-
+function deletePost(postId) {
     fetch(`/posts/${postId}`, {
         method: "DELETE"
     });
 
     const deletedPostIndex = posts.findIndex(element => element._id == postId);
     posts.splice(deletedPostIndex, 1);
+    Posts();
 }
 
-
-
-    // fetch("/accounts", {
-    //     method: "POST",
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(account)
-    // }).then(res => {
-    //     // console.log("Request complete! response:", res);
-    // });
-
-
-    // function addAccount(){
-    //     const account = {
-    //         username: "b_tiko_a",
-    //         password: '5cf5c7ca60p',
-    //         position: "owner"
-    //     };
-
-    //     fetch("/accounts", {
-    //         method: "GET"
-    //     }).then(res => {
-    //         res.json().then(value => {
-    //             accounts = value;
-    //         })
-    //     });
-    //     content.innerHTML += accounts[0]["username"] + "<br>"
-    // }
-
- function Blog(){
+function Blog(){
     localStorage.setItem("page", "Blog");
     title.innerHTML = "My blog"
+    content.innerHTML=""
     if(localStorage["role"]=="owner")  AddingNewBlog()
+    Posts()
+}
+
+function Posts(){
+    content.innerHTML+="<div id='posts'></div>"
+    id("posts").innerHTML=""
+    for(var i=0; i<posts.length; i++){
+        id("posts").innerHTML+="<h3>" + posts[i]["title"]+ "</h3><br>" 
+        localStorage['language']=="ru" ? id("posts").innerHTML+= posts[i]["content"]["ru"] : id("posts").innerHTML+= posts[i]["content"]["eng"]
+        id("posts").innerHTML+="<br><br><input type='button' value='delete' id=" + posts[i]['_id'] + " onClick='deletePost(this.id)'></input><hr> "
+    }
 }
     
 function AddingNewBlog(){
 
     let NewPostForm={
-        "theme": "theme <br> <select>",
+        "theme": "theme <br> <select id='theme'>",
         "title": "title <br> <input id='postTitle' style='width:176px' type='text'> </input>",
         "PostRu": "Post in russian <br> <textarea id='postRu' style='width:90%; height:100px'></textarea>",
         "PostEng": "Post in english <br> <textarea  id='postEng' style='width:90%; height:100px'></textarea>",
-        "Submit": "<input type='button' id='add' value='add'></input>"
+        "Submit": "<input type='button' id='add'value='add' onclick='addPost()'></input>"
     }
 
     themes=[
@@ -89,14 +50,7 @@ function AddingNewBlog(){
     for(var i=0; i<Object.keys(NewPostForm).length; i++) form=form.concat(NewPostForm[Object.keys(NewPostForm)[i]] + "<br><br>")
     form=form.concat("</form>");
     
-    content.innerHTML=form;
-
-    css("addNewPost", {
-        // "padding": "20px"
-
-    })
-
-    id("add").addEventListener("click", addPost);
+    content.innerHTML+=form;
 }   
 
 
@@ -106,7 +60,7 @@ function addPost(){
             author: localStorage["account"],
             title: id("postTitle").value,
             content: {"ru": id('postRu').value, "eng": id('postEng').value},
-            page: localStorage["page"]
+            page: id("theme").value
         };
     
         fetch("/posts", {
