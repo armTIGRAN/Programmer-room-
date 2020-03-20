@@ -1,7 +1,7 @@
 let homePage=false;
 let posts =[];
 
-PageSettings();
+setPageSettings();
 
 
 const content = id("PageContent");
@@ -17,7 +17,8 @@ function css(Id, css){
     }
 }
 
-function PageSettings(){
+function setPageSettings(){
+
 
     if(!localStorage.getItem("page")){
         homePage=true;

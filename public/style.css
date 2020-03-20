@@ -87,6 +87,12 @@ b{
   font-size: 15px;
 }
 
+#loginForm{
+  margin-left: auto;
+  padding-right: 25px;
+  margin-top: 5px;
+}
+
 #body{
   display: -moz-box;
   display: -webkit-box;
@@ -314,4 +320,3 @@ b{
 .language li:active {
   transform: translateY(6px);
 }
-

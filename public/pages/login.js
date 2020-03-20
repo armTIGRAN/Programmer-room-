@@ -3,22 +3,49 @@ if(!localStorage.getItem("account") || localStorage["account"]=="login" || local
 }
 
 function login(){
-    localStorage.setItem("page", "login");
 
-    content.innerHTML ='<div id="LoginDiv"> <h1 id="login">Login</h1> <br> <span id="loginUsername"></span> <input id="username" style="margin-left:5px; width: 150px"> <br><br> <span id="loginPassword"></span> <input id="password" type="password" style=" margin-left:9px; width: 150px"><br><br> <button type="button" style="margin-left:-6px; width:145px" onclick=ForgetPassword()><spam id="ForgetPassword"></spam></button><button type="button" style="width:87px; margin-left:5px" onclick=LoginUser()><spam id="LogButton"></spam></button> </div>'; 
-    id("LoginDiv").style.marginLeft="35px"
+    let username = '<span id="loginUsername" style="color:white"></span> <input id="username" ></input>'
+    let password = '<span id="loginPassword" style="color:white"></span> <input id="password" type="password"></input>'
+
+
+    id("loginForm").innerHTML=username + "<br>" + password;
+
+
+    css("username",{
+        "margin-left": "10px", 
+        "width":"150px",
+        "height":"24px",
+        "margin-top":"7px"
+    });
+
+    css("password", {
+        "margin-left": "13.5px",
+        "width": "150px",
+        "height": "24px",
+        "margin-top":"10px"
+    });
+
+    css("loginPassword", {
+        "margin-left": "-4px",
+        "width":"30px"
+    })
+
+    id("username").onkeypress = function (event) {
+        if(event.key=="Enter") id("password").focus();
+    }
+    id("password").onkeypress = function (event) {
+        if(event.key=="Enter") LoginUser();
+    }
 
     if(localStorage["language"]=="eng"){
-        id("loginUsername").innerHTML="Username: ";
-        id("loginPassword").innerHTML="Password: ";
+        id("loginUsername").innerHTML="Username";
+        id("loginPassword").innerHTML="Password";
     }else{
         id("loginUsername").style.paddingRight="44px";
         id("loginPassword").style.paddingRight="13px";
-        id("loginUsername").innerHTML="Ник: ";
-        id("loginPassword").innerHTML="Пароль: ";
+        id("loginUsername").innerHTML="Ник";
+        id("loginPassword").innerHTML="Пароль";
     }
-    navigation("LogButton", "login", "вход"); 
-    navigation("ForgetPassword", "forget password?", "забыли пароль?");
 } 
 
 function LoginUser(){
@@ -33,7 +60,10 @@ function LoginUser(){
 		if (res.status == 401) {
             res.json().then(err => {
                 if (err.errorMessage == 'wrongPassword') alert("wrong password");
-                else alert("wrong username");
+                else {
+                    alert("wrong username");
+                    id("username").focus();
+                }
             });
         }
         else{
