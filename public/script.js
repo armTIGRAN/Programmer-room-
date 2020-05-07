@@ -1,8 +1,7 @@
 let homePage=false;
 let posts =[];
 
-setPageSettings();
-
+window.addEventListener('load', setPageSettings, false);
 
 const content = id("PageContent");
 const title = id("title");
@@ -18,7 +17,6 @@ function css(Id, css){
 }
 
 function setPageSettings(){
-
 
     if(!localStorage.getItem("page")){
         homePage=true;

@@ -18,7 +18,7 @@ navigation("siteNameH2", "Programmer room", "Programmer room", HomePage);
 //TOP MENU
 navigation("Home", "Home", "Главная", HomePage);
 
-navigation("Blog", "Blog", "Блог",Blog);
+navigation("Blog", "Blog", "Блог", Blog);
 // navigation("About", "About", "Информация", About);
 navigation("Updates", "Updates", "Обновления");
 navigation("Account", localStorage["account"], localStorage["account"], login)
@@ -31,21 +31,28 @@ navigation("Sources", "Sources", "Источники");
 // #RIGHT MENU#
 
 //Blog
-navigation("All", "All", "Всё");
-navigation("Projects", "Projects", "Проекты");
+navigation("All", "All posts", "Все посты");
+navigation("Projects", "All projects", "Все проекты");
 
 //Javascript
+navigation("JSbegin", "For begginers", "Для новичков");
+navigation("JSuseful", "Useful", "Полезное");
+navigation("JSalgorithms", "Alghoritms", "Алгоритмы");
 navigation("JSProjects", "Projects", "Проекты");
+// navigation("JSreact", "React", "React");
 
-//Scratch
-
+//Python
+navigation("PythonBegin", "For begginers", "Для новичков");
+navigation("PythonUseful", "Useful", "Полезное");
+navigation("PythonAlgorithms", "Alghoritms", "Алгоритмы");
+navigation("PythonProjects", "Projects", "Проекты");
 //Info
 
 
 if(homePage) HomePage();
 else{
-    if(localStorage["page"]=="HomePage") HomePage()
-    if(localStorage["page"]=="login") login()
-    if(localStorage["page"]=="About") About()
-    if(localStorage["page"]=="Blog") Blog()
+    if(localStorage["page"]=="HomePage") HomePage();
+    if(localStorage["page"]=="login") login();
+    if(localStorage["page"]=="About") About();
+    if(localStorage["page"]=="Blog") Blog();
 }

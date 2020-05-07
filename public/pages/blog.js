@@ -10,21 +10,12 @@ function deletePost(postId) {
 
 function Blog(){
     localStorage.setItem("page", "Blog");
-    title.innerHTML = "My blog"
-    content.innerHTML=""
-    if(localStorage["role"]=="owner")  AddingNewBlog()
-    Posts()
+    title.innerHTML = "My blog";
+    content.innerHTML="";
+    if(localStorage["role"]=="owner")  AddingNewBlog();
+    Posts();
 }
 
-function Posts(){
-    content.innerHTML+="<div id='posts'></div>"
-    id("posts").innerHTML=""
-    for(var i=0; i<posts.length; i++){
-        id("posts").innerHTML+="<h3>" + posts[i]["title"]+ "</h3><br>" 
-        localStorage['language']=="ru" ? id("posts").innerHTML+= posts[i]["content"]["ru"] : id("posts").innerHTML+= posts[i]["content"]["eng"]
-        id("posts").innerHTML+="<br><br><input type='button' value='delete' id=" + posts[i]['_id'] + " onClick='deletePost(this.id)'></input><hr> "
-    }
-}
     
 function AddingNewBlog(){
 
@@ -81,4 +72,20 @@ function addPost(){
     }else{
         alert("Нечего добавлять :)")
     } 
+}
+
+
+function Posts(){
+    content.innerHTML+="<div id='posts'></div>"
+    id("posts").innerHTML="";
+    for(var i=0; i<posts.length; i++){
+        id("posts").innerHTML+="<h3>" + posts[i]["title"]+ "</h3>" 
+        id("posts").innerHTML+="<h6>" + posts[i]["page"]+ "</h6><br>" 
+        localStorage['language']=="ru" ? id("posts").innerHTML+= posts[i]["content"]["ru"] : id("posts").innerHTML+= posts[i]["content"]["eng"]
+        id("posts").innerHTML+="<br><br><input type='button' value='delete' id=" + posts[i]['_id'] + " onClick='deletePost(this.id)'></input><hr> "
+    }
+
+    css("PageContent", {
+        'padding-left': '40px'
+    })
 }
