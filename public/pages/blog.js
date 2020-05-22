@@ -99,16 +99,17 @@ function Posts() {
             post = post.replace(code[0], newCode)
         }
 
-        id('posts').innerHTML += '<div id=' + i + '>' + post + '</div> <br><br>'
+        id('posts').innerHTML += '<div id=' + i + '>' + post + '</div> <br>'
         id(i).innerHTML = id(i).innerHTML.replace('&lt;code&gt; ', '')
         id(i).innerHTML = id(i).innerHTML.replace('&lt;/code&gt;', '')
+
+
+        // id(i).innerHTML += '<hr style="border-top: 1px dashed black">';
+        id(i).innerHTML += '<hr style="border-top: 1px dotted black"> <br>';
 
         if (localStorage["role"] == "owner") {
             id("posts").innerHTML += "<input type='button' value='delete' id=" + posts[i]['_id'] + " onClick='deletePost(this.id)'></input>"
         }
-
-        // id(i).innerHTML += '<hr style="border-top: 1px dashed black">';
-        id(i).innerHTML += '<hr style="border-top: 1px dotted black">';
     }
 
     css("PageContent", {
