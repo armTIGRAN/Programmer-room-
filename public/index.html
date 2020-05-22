@@ -1,99 +1,106 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <title>Programmer room</title>
-        <link rel="shortcut icon" href="/images/favicon2.ico" type="image/png">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta charset="utf8">
-        
-        <link rel="stylesheet" href="style.css">																								
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    </head>
+<head>
+    <title>Programmer room</title>
+    <link rel="shortcut icon" href="/images/favicon2.ico" type="image/png">
 
-    <body>
-        <div id="wrapper">
-            <div id="header">
-                <div  class="logo"  >
-                    <img style="width: 45px; height: 75px; margin-top: 4px; margin-left:30px;" src="images/logoV2.png" >
-                </div>
-            
-                <hgroup class="siteName">
-                    <h2 id="siteNameH2"></h2>
-                    <h3 id="siteNameH3"> Blog by <a href=""> <spans style="margin-left: 5px;">Tigran Badalyan</span>  </a> </h3>
-                </hgroup> 
-                
-                <div id="loginForm">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf8">
 
-                </div>
-            </div >
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
 
-            <ul class="menuHeader">  
-                <li id="free"></li>
-                <li id="Home"></li>
-                <li id="Blog"></li>
-                <li id="Updates"></li>
-                <li id="Account"></li>
-            </ul>
-        
-            <div id="body">
-                <aside id="leftMenu">
-                    <div class="language">
-                        <img style="width: 50px; height:50px; margin-bottom:15px;" src="images/language.png" >
-                        <ul>
-                            <li style=" margin-left:-11x " Id="eng">Eng</li>
-                            <li class="eng" style=" margin-left:5px " Id="ru">Ru</li> 
-                        </ul> 
-                    </div>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div class="logo">
+                <img style="width: 45px; height: 75px; margin-top: 4px; margin-left:30px;" src="images/logoV2.png">
+            </div>
 
-                    <nav style="margin-top: -8px" >
-                        <ul id="test">
-                            <li onclick="books()"><span id="Books"> </span></li>
-                            <li onclick="courses()"><span id="Courses"></span></li>
-                            <li onclick="sources()"><span id="Sources"></span></li>
-                        </ul>
-                    </nav>
-                </aside>
+            <hgroup class="siteName">
+                <h2><b id="siteNameH2"></b></h2>
+                <h3 id="siteNameH3">
+                    <a href="">
+                        <span style="margin-left: 5px; color:white">Tigran Badalyan</span>
+                    </a>
+                </h3>
+            </hgroup>
 
-                <div class="content">
-                    <h1 id="title" style="color:rgb(49, 49, 134)"></h1>
-                    <br>
-                    <section id="PageContent"> 
-            
-                    </section>
-                </div>
+            <div id="loginForm">
 
-                <aside id="rightMenu">
-                    <br> <br>
-                    <ul>
-                        <h1><strong> Blog</strong></h1>
-                        <li id="All"></li>
-                        <li id="Projects"></li>
-                        <h2> JavaScript</h2>
-                        <li id='JSbegin'></li>
-                        <li id="JSuseful"></li>
-                        <li id="JSalgorithms"></li>
-                        <li id="JSProjects"></li>
-                        <!-- <li id='JSReact'></li> -->
-                        <h2>Python</h2>
-                        <li id='PythonBegin'></li>
-                        <li id="PythonUseful"></li>
-                        <li id="PythonAlgorithms"></li>
-                        <li id="PythonProjects"></li>
-                    </ul>
-                </aside>
             </div>
         </div>
-    </body>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="pages/home.js"></script>
-    <script type="text/javascript" src="pages/login.js"></script>
-    <script type="text/javascript" src="pages/blog.js"></script>
-    <script type="text/javascript" src="pages/books.js"></script>
-    <script type="text/javascript" src="content.js"></script>
+        <ul class="menuHeader">
+            <li id="free"></li>
+            <li id="Home"></li>
+            <li id="Friends"></li>
+            <li id="Blog"></li>
+            <li id="Updates"></li>
+            <li id="Account"></li>
+        </ul>
+
+        <div id="body">
+            <aside id="leftMenu">
+                <div class="language">
+                    <img style="width: 50px; height:50px; margin-bottom:15px;" src="images/language.png">
+                    <ul>
+                        <li style=" margin-left:-11x " Id="eng">Eng</li>
+                        <li class="eng" style=" margin-left:5px " Id="ru">Ru</li>
+                    </ul>
+                </div>
+
+                <nav style="margin-top: -8px">
+                    <ul id="leftMenuCategories">
+                        <li onclick="books()"><span id="Books"> </span></li>
+                        <li onclick="courses()"><span id="Courses"></span></li>
+                        <li onclick="sources()"><span id="Sources"></span></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="content">
+                <h1 id="title" style="color:rgb(49, 49, 134)"></h1>
+                <br>
+                <section id="PageContent">
+
+                </section>
+            </div>
+
+            <aside id="rightMenu">
+                <br> <br>
+                <ul>
+                    <h1><strong> Blog</strong></h1>
+                    <li id="All"></li>
+                    <li id="Projects"></li>
+                    <h2> JavaScript</h2>
+                    <li id='JSbegin'></li>
+                    <li id="JSuseful"></li>
+                    <li id="JSalgorithms"></li>
+                    <li id="JSProjects"></li>
+                    <!-- <li id='JSReact'></li> -->
+                    <h2>Python</h2>
+                    <li id='PythonBegin'></li>
+                    <li id="PythonUseful"></li>
+                    <li id="PythonAlgorithms"></li>
+                    <li id="PythonProjects"></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="pages/home.js"></script>
+<script type="text/javascript" src="pages/login.js"></script>
+<script type="text/javascript" src="pages/blog.js"></script>
+<script type="text/javascript" src="pages/books.js"></script>
+<script type="text/javascript" src="content.js"></script>
+
 </html>

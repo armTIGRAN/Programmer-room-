@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 // Listen for requests
-var server = app.listen(app.get('port'), function () {
+var server = app.listen(app.get('port'), function() {
     var port = server.address().port;
     console.log('Magic happens on port ' + port);
 });
@@ -21,6 +21,8 @@ var server = app.listen(app.get('port'), function () {
 
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
+
+// console.log(dbPassword)
 
 // const connectionString = `mongodb+srv://$mongo "mongodb+srv://cluster0-gt3si.gcp.mongodb.net/test" --username b_tiko
 // {dbUser}:${dbPassword}@cluster0-gt3si.gcp.mongodb.net/programmer-room?retryWrites=true&w=majority`;
@@ -50,7 +52,7 @@ app.get('/posts', (req, res) => {
 });
 
 app.delete('/posts/:id', (req, res) => {
-    db.posts.remove({_id: mongojs.ObjectId(req.params.id)}, (error, result) => {
+    db.posts.remove({ _id: mongojs.ObjectId(req.params.id) }, (error, result) => {
         if (error) {
             res.status(500).send(error);
         } else {
@@ -62,13 +64,13 @@ app.delete('/posts/:id', (req, res) => {
 
 // Get accounts
 app.post('/login', (req, res) => {
-    db.accounts.findOne({username: req.body.username}, (error, result) => {
+    db.accounts.findOne({ username: req.body.username }, (error, result) => {
         if (error) {
             res.status(500).send(error);
         } else if (!result) {
-            res.status(401).send({errorMessage: 'wrongUsername'});
+            res.status(401).send({ errorMessage: 'wrongUsername' });
         } else if (req.body.password != result.password) {
-            res.status(401).send({errorMessage: 'wrongPassword'});
+            res.status(401).send({ errorMessage: 'wrongPassword' });
         } else {
             delete result.password;
 
