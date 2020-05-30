@@ -14,12 +14,18 @@ function deletePost(postId) {
 
 function Blog() {
     localStorage.setItem("page", "Blog");
-    title.innerHTML = "My blog";
+    title.innerHTML = "Blog";
     content.innerHTML = "";
     if (localStorage["role"] == "owner") AddingNewBlog();
+    content.innerHTML += '<input id="searchBar" > <button> Search </button> <br> <br>'
+
+    css('searchBar', {
+        'margin-left': '-10px',
+        'margin-top': '15px'
+    })
+
     Posts();
 }
-
 
 function AddingNewBlog() {
 
@@ -32,12 +38,20 @@ function AddingNewBlog() {
     }
 
     themes = [
-        "Javascript: projects",
-        "Javascript: alghoritms",
-        "Python: projects"
+        { 'eng': 'Javascript: For begginers', 'ru': 'Javascript: для новичков' },
+        { 'eng': 'Javascript: Useful', 'ru': 'Javascript: Полезное' },
+        { 'eng': 'Javascript: Alghoritms', 'ru': 'Javascript: Алгоритмы' },
+        { 'eng': 'Javascript: Projects', 'ru': 'Javascript: Проекты' },
+        { 'eng': 'Python: For begginers', 'ru': 'Python: для новичков' },
+        { 'eng': 'Python: Useful', 'ru': 'Python: Полезное' },
+        { 'eng': 'Python: Alghoritms', 'ru': 'Python: Алгоритмы' },
+        { 'eng': 'Python: Projects', 'ru': 'Python: Проекты' },
     ]
 
-    for (var i = 0; i < themes.length; i++) NewPostForm["theme"] = NewPostForm["theme"].concat("<option>" + themes[i] + "</option>")
+    if (localStorage["language"] == "eng")
+        for (var i = 0; i < themes.length; i++) NewPostForm["theme"] = NewPostForm["theme"].concat("<option>" + themes[i]['eng'] + "</option>")
+    else
+        for (var i = 0; i < themes.length; i++) NewPostForm["theme"] = NewPostForm["theme"].concat("<option>" + themes[i]['ru'] + "</option>")
 
     NewPostForm["theme"] = NewPostForm["theme"].concat("</select>")
 
@@ -48,30 +62,30 @@ function AddingNewBlog() {
     content.innerHTML += form;
 }
 
-
 function addPost() {
+
     if (id("postRu").value || id("postEng").value) {
         const post = {
-            author: localStorage["account"],
-            title: id("postTitle").value,
-            content: { "ru": id('postRu').value, "eng": id('postEng').value },
-            page: id("theme").value
-        };
-
-        fetch("/posts", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(post)
-        }).then(res => {
-            // console.log("Request complete! response:", res);
-        });
-
-        fetch("/posts", {
-            method: "GET"
-        }).then(res => {
-            res.json().then(value => {
-                posts = value;
+                author: localStorage["account"],
+                title: id("postTitle").value,
+                content: { "ru": id('postRu').value, "eng": id('postEng').value },
+                page: id("theme").value,
+                likes: 0,
+                comments: [],
+                saves: 0,
+                time: new Date().getTime()
+            }
+            // console.log(posts)
+        const postIndex = posts.findIndex(element => element['page'] == id("theme").value);
+        console.log(postIndex)
+        new Promise(() => {
+            fetch("/posts", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(post)
             })
+        }).then(() => {
+            Posts()
         });
     } else {
         alert("Нечего добавлять :)")
@@ -79,54 +93,97 @@ function addPost() {
 }
 
 function Posts() {
-    content.innerHTML += "<div id='posts'></div>"
-    id("posts").innerHTML = "";
-    for (var i = 0; i < posts.length; i++) {
-        id("posts").innerHTML += "<h1>" + posts[i]["title"] + "</h1>"
-        id("posts").innerHTML += "<h6>" + posts[i]["page"] + "</h6><br>"
-        localStorage['language'] == "ru" ? post = posts[i]["content"]["ru"] : post = posts[i]["content"]["eng"]
 
-        code = post.match(/<code>(.|\s)*<\/code>/)
+    new Promise((resolve, reject) => {
+        fetch("/posts", {
+            method: "GET"
+        }).then(res => {
+            res.json().then(value => {
+                resolve(value)
+                reject('error')
+            })
+        });
+    }).then(function(value) {
+        posts = value;
+        content.innerHTML += "<div id='posts'></div>"
+        id("posts").innerHTML = "";
+        for (var i = 0; i < posts.length; i++) {
 
-        if (code) {
-            tagOpen = code[0].match(/</)
-            newCode = code[0].replaceAll(tagOpen, '&lt')
-            tagClose = code[0].match(/>/)
-            newCode = newCode.replaceAll(tagClose, '&gt')
-            newCodeLines = newCode.split('\n')
-            newCode = newCodeLines.join('<br>')
-            newCode = newCode.replaceAll(' ', '&nbsp')
-            post = post.replace(code[0], newCode)
+            localStorage['language'] == "ru" ? post = posts[i]["content"]["ru"] : post = posts[i]["content"]["eng"]
+            code = post.match(/<code>(.|\s)*<\/code>/)
+
+            if (code) {
+                tagOpen = code[0].match(/</)
+                newCode = code[0].replaceAll(tagOpen, '&lt')
+                tagClose = code[0].match(/>/)
+                newCode = newCode.replaceAll(tagClose, '&gt')
+                newCodeLines = newCode.split('\n')
+                newCode = newCodeLines.join('<br>')
+                newCode = newCode.replaceAll(' ', '&nbsp')
+                post = post.replace(code[0], newCode)
+            }
+
+            id('posts').innerHTML += '<div id=' + i + '></div> <br>'
+
+            id(i).innerHTML += "<h1>" + posts[i]["title"] + "</h1>"
+            id(i).innerHTML += "<h6>" + posts[i]["page"] + "</h6><br>"
+            id(i).innerHTML += post;
+
+            id(i).innerHTML = id(i).innerHTML.replace('&lt;code&gt;', '')
+            id(i).innerHTML = id(i).innerHTML.replace('&lt;/code&gt;', '')
+
+            timeDifference = Math.floor((new Date().getTime() - posts[i]['time']) / 1000)
+            let time = ' sec'
+
+            if (timeDifference >= 60) {
+                if (timeDifference < 3600) {
+                    timeDifference = Math.floor(timeDifference / 60);
+                    time = ' min'
+                } else if (timeDifference < 86400) {
+                    timeDifference = Math.floor(timeDifference / 3600)
+                    time = ' hour'
+                } else if (timeDifference < 2592000) {
+                    timeDifference = Math.floor(timeDifference / 86400)
+                    time = ' day'
+                } else if (timeDifference < 31104000) {
+                    timeDifference = Math.floor(timeDifference / 2592000)
+                    time = ' month'
+                } else {
+                    timeDifference = Math.floor(timeDifference / 31104000)
+                    time = ' year'
+                }
+            }
+
+            if (timeDifference > 1) time += 's'
+            timeDifference += time
+
+            id(i).innerHTML += '  <br><br> <p style="color:grey"> Published: ' + timeDifference + ' ago </p>'
+
+            if (localStorage["role"] == "owner") {
+                id(i).innerHTML += "<input type='button' value='code' id=" + posts[i]['_id'] + " onClick='postCode(this.id)'></input>"
+                id(i).innerHTML += "<input type='button' value='edit' id=" + posts[i]['_id'] + " onClick='editPost(this.id)'></input>"
+                id(i).innerHTML += "<input type='button' value='delete' id=" + posts[i]['_id'] + " onClick='deletePost(this.id)'></input>"
+            }
+
+            id(i).innerHTML += '<hr style="border-top: 1px dotted black"> <br>';
         }
 
-        id('posts').innerHTML += '<div id=' + i + '>' + post + '</div> <br>'
-        id(i).innerHTML = id(i).innerHTML.replace('&lt;code&gt; ', '')
-        id(i).innerHTML = id(i).innerHTML.replace('&lt;/code&gt;', '')
-
-
-        // id(i).innerHTML += '<hr style="border-top: 1px dashed black">';
-        id(i).innerHTML += '<hr style="border-top: 1px dotted black"> <br>';
-
-        if (localStorage["role"] == "owner") {
-            id("posts").innerHTML += "<input type='button' value='delete' id=" + posts[i]['_id'] + " onClick='deletePost(this.id)'></input>"
-        }
-    }
-
-    css("PageContent", {
-        'padding-left': '40px'
+        css("PageContent", {
+            'padding-left': '15px'
+        })
     })
 }
 
-/* <h1> Random text 1 </h1>
-    <code> 
-    <hgroup class="siteName">
-                    <h2><b id="siteNameH2"></b></h2>
-                    <h3 id="siteNameH3">
-                        <a href="">
-                            <span style="margin-left: 5px; color:white">Tigran Badalyan</span>
-                        </a>
-                    </h3>
-                </hgroup>
-    </code>
+function postCode(postId) {
+    const postIndex = posts.findIndex(element => element._id == postId);
+    localStorage['language'] == 'ru' ? alert(posts[postIndex]['content']['ru']) : alert(posts[postIndex]['content']['eng'])
+}
 
-    <h2>Random text 2 </h2> */
+function editPost(postId) {
+    const postIndex = posts.findIndex(element => element._id == postId);
+
+    id("postTitle").value = posts[postIndex]['title']
+    id("postRu").value = posts[postIndex]['content']['ru']
+    id("postEng").value = posts[postIndex]['content']['eng']
+    id("theme").value = posts[postIndex]['page']
+}

@@ -1,6 +1,8 @@
 function HomePage() {
 
     localStorage.setItem("page", "HomePage");
+    id('title').innerHTML = 'Home';
+    id('pageTitle').innerHTML = '';
     content.innerHTML = "<img id='mainImg' src='../images/programmer-room.jpg'/>";
 
     css("mainImg", {

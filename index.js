@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
-const mongojs = require('mongojs')
+const mongojs = require('mongojs');
 
 // Define the port to run on
 app.set('port', process.env.PORT || 80);
@@ -59,8 +59,8 @@ app.delete('/posts/:id', (req, res) => {
             res.send(result);
         }
     });
-
 });
+
 
 // Get accounts
 app.post('/login', (req, res) => {
