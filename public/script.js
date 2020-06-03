@@ -16,6 +16,16 @@ function css(Id, css) {
     }
 }
 
+function navigation(Id, eng, rus, functionName) {
+    localStorage["language"] == "eng" ? id(Id).innerHTML = eng : id(Id).innerHTML = rus;
+    id(Id).addEventListener("click", functionName);
+}
+
+function translate(rus = eng, eng = rus) {
+    if (localStorage["language"] == "ru") return rus
+    else return eng
+}
+
 function setPageSettings() {
 
     if (!localStorage.getItem("page")) {

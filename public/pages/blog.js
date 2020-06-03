@@ -5,11 +5,11 @@ String.prototype.replaceAll = function(search, replace) {
 function deletePost(postId) {
     fetch(`/posts/${postId}`, {
         method: "DELETE"
+    }).then(() => {
+        const deletedPostIndex = posts.findIndex(element => element._id == postId);
+        posts.splice(deletedPostIndex, 1);
+        Posts();
     });
-
-    const deletedPostIndex = posts.findIndex(element => element._id == postId);
-    posts.splice(deletedPostIndex, 1);
-    Posts();
 }
 
 function Blog() {
@@ -23,7 +23,6 @@ function Blog() {
         'margin-left': '-10px',
         'margin-top': '15px'
     })
-
     Posts();
 }
 
@@ -65,31 +64,32 @@ function AddingNewBlog() {
 function addPost() {
 
     if (id("postRu").value || id("postEng").value) {
+
+        if (!id("postEng").value) id("postEng").value = id("postRu").value
+        if (!id("postRu").value) id("postRu").value = id("postEng").value
+
         const post = {
-                author: localStorage["account"],
-                title: id("postTitle").value,
-                content: { "ru": id('postRu').value, "eng": id('postEng').value },
-                page: id("theme").value,
-                likes: 0,
-                comments: [],
-                saves: 0,
-                time: new Date().getTime()
-            }
-            // console.log(posts)
-        const postIndex = posts.findIndex(element => element['page'] == id("theme").value);
-        console.log(postIndex)
-        new Promise(() => {
-            fetch("/posts", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(post)
-            })
-        }).then(() => {
-            Posts()
-        });
-    } else {
-        alert("Нечего добавлять :)")
-    }
+            author: [localStorage["account"], localStorage['role']],
+            title: id("postTitle").value,
+            content: { "ru": id('postRu').value, "eng": id('postEng').value },
+            page: id("theme").value,
+            likes: 0,
+            comments: [],
+            saves: 0,
+            time: new Date().getTime()
+        }
+
+        const postIndex = posts.findIndex(element => element['title'] == id("postTitle").value);
+        if (postIndex == -1) {
+            new Promise(() => {
+                fetch("/posts", {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(post)
+                })
+            }).then(Posts());
+        } else alert(translate('Публикация с таким именем уже существует', 'A publication with the same name already exists.'))
+    } else alert(translate("Публикация пустая", "The publication is empty."))
 }
 
 function Posts() {
@@ -110,9 +110,9 @@ function Posts() {
         for (var i = 0; i < posts.length; i++) {
 
             localStorage['language'] == "ru" ? post = posts[i]["content"]["ru"] : post = posts[i]["content"]["eng"]
-            code = post.match(/<code>(.|\s)*<\/code>/)
 
-            if (code) {
+            code = post.match(/<code>(.|\s)*?<\/code>/)
+            while (code) {
                 tagOpen = code[0].match(/</)
                 newCode = code[0].replaceAll(tagOpen, '&lt')
                 tagClose = code[0].match(/>/)
@@ -121,6 +121,7 @@ function Posts() {
                 newCode = newCodeLines.join('<br>')
                 newCode = newCode.replaceAll(' ', '&nbsp')
                 post = post.replace(code[0], newCode)
+                code = post.match(/<code>(.|\s)*?<\/code>/)
             }
 
             id('posts').innerHTML += '<div id=' + i + '></div> <br>'
@@ -129,8 +130,8 @@ function Posts() {
             id(i).innerHTML += "<h6>" + posts[i]["page"] + "</h6><br>"
             id(i).innerHTML += post;
 
-            id(i).innerHTML = id(i).innerHTML.replace('&lt;code&gt;', '')
-            id(i).innerHTML = id(i).innerHTML.replace('&lt;/code&gt;', '')
+            id(i).innerHTML = id(i).innerHTML.replaceAll('&lt;code&gt;', '')
+            id(i).innerHTML = id(i).innerHTML.replaceAll('&lt;/code&gt;', '')
 
             timeDifference = Math.floor((new Date().getTime() - posts[i]['time']) / 1000)
             let time = ' sec'
@@ -157,14 +158,13 @@ function Posts() {
             if (timeDifference > 1) time += 's'
             timeDifference += time
 
-            id(i).innerHTML += '  <br><br> <p style="color:grey"> Published: ' + timeDifference + ' ago </p>'
+            id(i).innerHTML += `<br><p style="color:grey"> Published: ${timeDifference} ago <br> By: <b> &nbsp ${posts[i]['author'][0]} </b>  ( ${posts[i]['author'][1]} ) </p>`
 
             if (localStorage["role"] == "owner") {
-                id(i).innerHTML += "<input type='button' value='code' id=" + posts[i]['_id'] + " onClick='postCode(this.id)'></input>"
-                id(i).innerHTML += "<input type='button' value='edit' id=" + posts[i]['_id'] + " onClick='editPost(this.id)'></input>"
-                id(i).innerHTML += "<input type='button' value='delete' id=" + posts[i]['_id'] + " onClick='deletePost(this.id)'></input>"
+                id(i).innerHTML += `<input style='margin:2px' type='button' value='code' id= ${posts[i]['_id']}  onClick='postCode(this.id)'></input>`
+                id(i).innerHTML += `<input style='margin:2px' type='button' value='edit' id= ${posts[i]['_id']}  onClick='editPost(this.id)'></input>`
+                id(i).innerHTML += `<input style='margin:2px' type='button' value='delete' id= ${posts[i]['_id']}  onClick='deletePost(this.id)'></input>`
             }
-
             id(i).innerHTML += '<hr style="border-top: 1px dotted black"> <br>';
         }
 

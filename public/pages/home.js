@@ -21,18 +21,24 @@ function HomePage() {
         "float": "left"
     });
 
-    let name = "<h1> <b>Tigran Badalyan </b>  </h1> ";
+    let name = `<h1> <b>${translate('Тигран Бадалян', 'Tigran Badalyan')} </b>  </h1> `;
     let gmail = " <a href='https://mail.google.com/mail/u/0/#sent?compose=CllgCJvkZCVKPzgccKkqWVvtGwmQLrjVNlhgDgGXMrwrWRQKLJQNGmCfBqRBxkCCqRrrbGtXbQq' target='_blank'>  <span> btigran02@gmail.com  </span> </a>"
     let vk = "<a href='https://vk.com/armtigran' target='_blank'> <span style='margin-left:20px'> Vk </span> <a/>"
     let instagram = "<a href='https://www.instagram.com/biktiko/?hl=ru' target='_blank'> <span style='margin-left:20px'> Instagram </span>  </a> "
     let github = "<a href='https://github.com/armTIGRAN' target='_blank'> <span style='margin-left:20px'>Github</span> <a/> "
 
-    aboutMe = translate(
+    aboutPage = translate(
         "<li> • Обучение на простом языке </li> <li> • Обзоры на свои проекты </li> <li>• Рекомендации лучших книг, источников и курсов</li> <li>• Советы для новичков </li> <li> • Отвечу каждому, помогу чем смогу </li>",
         "<li> • Teaching in an acceptable language </li> <li> • Revieus on my projects </li> <li>• Recommendations for best books, sources and cources </li> <li>• Tips for begginers </li> <li> •I will answer anyone and help to the best of my ability </li>"
     )
 
-    id("aboutContent").innerHTML += " <ul id='aboutProject'>" + name + gmail + vk + instagram + github + '<hr>' + aboutMe + "</ul>";
+    siteInfo = translate(
+        'Я пишу это в начале Июня 2020 года. <br> Занимаюсь разработкай сайта, когда есть время и настроение, не спеша, и просто наслаждаюсь этим. <br> Всё началось с книги Сонмеза Джона "Путь программиста"-а, а точнее, с главы "Создаём успешный блог". Я когда нибудь расскажу об этой книге, но суть в том, что я понял, что мне нужен собственный блог. Да, я мог за пару минут создать его в wordpress-е например, но '
+    )
+
+    id("aboutContent").innerHTML += `<ul id='aboutProject'>  ${name}  ${gmail} ${vk} ${instagram} ${github} <hr> ${aboutPage} </ul>`;
+    // id("pageContent").innerHTML += '<h3 style="text-align:center"> <b> Info </b> </h3>'
+    // id("pageContent").innerHTML += `<br> <h5> ${siteInfo} </h5>`
 
     css("aboutContent", {
         "marginLeft": "350px"

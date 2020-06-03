@@ -44,7 +44,7 @@ b {
 }
 
 #wrapper {
-    max-width: 100%;
+    max-width: 101%;
     display: -moz-box;
     display: -webkit-box;
     -moz-box-orient: vertical;
@@ -58,7 +58,7 @@ b {
 }
 
 #header {
-    width: 100.5%;
+    /* width: 100.5%; */
     height: 85px;
     background-color: rgb(51, 204, 204);
     display: -moz-box;
@@ -252,7 +252,7 @@ b {
 }
 
 #rightMenu {
-    margin-left: 35px;
+    margin-left: 10px;
     margin-top: 45px;
 }
 
