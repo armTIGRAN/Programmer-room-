@@ -2,9 +2,9 @@ navigation("siteNameH2", "Programmer room", "Programmer room", HomePage);
 
 //TOP MENU
 navigation("Home", "Home", "Главная", HomePage);
-navigation("Friends", "Friends", "Друзья", Friends);
+// navigation("Friends", "Friends", "Друзья", Friends);
 navigation("Blog", "Blog", "Блог", Blog);
-navigation("Updates", "Updates", "Обновления");
+// navigation("Updates", "Updates", "Обновления");
 // if (localStorage['role'] == 'owner') navigation("Register", "Sign up", "Регистрация", Register);
 navigation("Account", localStorage["account"], localStorage["account"], login)
 
